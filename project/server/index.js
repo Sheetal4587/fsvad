@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 5001;
 // CORS configuration
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' 
-    ? ['your-production-domain.com'] // Replace with your actual production domain
+    ? ['https://finapp-frontend.onrender.com', 'https://finapp-backend.onrender.com'] // Production URLs
     : '*', // Allow all origins in development
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -44,6 +44,14 @@ app.get('/health', (req, res) => {
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+// For production, also serve the frontend build
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  });
+}
 
 // Rate limiting
 const limiter = rateLimit({

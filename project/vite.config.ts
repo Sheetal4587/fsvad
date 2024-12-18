@@ -8,7 +8,9 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:5001',
+        target: process.env.NODE_ENV === 'production'
+          ? 'https://finapp-backend.onrender.com'
+          : 'http://localhost:5001',
         changeOrigin: true,
         secure: false
       }
@@ -20,7 +22,16 @@ export default defineConfig({
     },
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json']
   },
-  optimizeDeps: {
-    include: ['react', 'react-dom']
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          mui: ['@mui/material', '@mui/icons-material']
+        }
+      }
+    }
   }
 })
