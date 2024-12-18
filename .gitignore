@@ -22,3 +22,7 @@ config.json
 dist/
 build/
 *.log
+
+# Allow database files
+!*.db
+!Thumbs.db

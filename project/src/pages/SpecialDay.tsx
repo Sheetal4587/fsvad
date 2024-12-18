@@ -221,8 +221,8 @@ const SpecialDay = () => {
         notes: `Call client for ${selectedEvent.type} wishes and discuss rural banking services`
       };
 
-      // Send reminder to backend
-      const response = await axios.post('http://localhost:5001/api/reminders/create', reminder);
+      // Send reminder to backend using relative URL
+      const response = await axios.post('/api/reminders/create', reminder);
 
       if (response.data.success) {
         setCallReminders([...callReminders, response.data.data]);

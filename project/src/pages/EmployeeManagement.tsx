@@ -81,7 +81,7 @@ export default function EmployeeManagement() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/employees');
+      const response = await fetch('/api/employees');
       if (!response.ok) {
         throw new Error('Failed to fetch employees');
       }
@@ -95,7 +95,7 @@ export default function EmployeeManagement() {
   const handleAddEmployee = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5001/api/employees', {
+      const response = await fetch('/api/employees', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ export default function EmployeeManagement() {
 
   const handleDeleteEmployee = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:5001/api/employees/${id}`, {
+      const response = await fetch(`/api/employees/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {

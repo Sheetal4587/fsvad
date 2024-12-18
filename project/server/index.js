@@ -24,7 +24,9 @@ const PORT = process.env.PORT || 5001;
 
 // CORS configuration
 const corsOptions = {
-  origin: ['http://localhost:5173', 'http://localhost:5174'], // Allow both Vite dev server ports
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['your-production-domain.com'] // Replace with your actual production domain
+    : '*', // Allow all origins in development
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -51,7 +53,10 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Routes
-app.use('/api/special-days', specialDaysRouter);
+app.use('/api/special-days', (req, res, next) => {
+  console.log('Special Days Route accessed:', req.method, req.path);
+  next();
+}, specialDaysRouter);
 app.use('/api/messages', messagesRouter);
 app.use('/api/employees', employeesRouter);
 app.use('/api/deals', dealsRouter);
