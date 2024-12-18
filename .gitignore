@@ -17,7 +17,7 @@ config.json
 
 # Operating System Files
 .DS_Store
-Thumbs.db
+# Thumbs.db
 
 # Build outputs
 dist/
