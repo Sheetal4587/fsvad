@@ -34,5 +34,11 @@ export default defineConfig({
         }
       }
     }
+  },
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+  },
+  define: {
+    'process.env.VITE_SKIP_TS_CHECK': JSON.stringify(process.env.VITE_SKIP_TS_CHECK)
   }
 })
