@@ -1,0 +1,46 @@
+# Git Setup Commands
+
+# 1. Configure Git Globally
+git config --global user.name "Sheetal4587"
+git config --global user.email "nandargimadhu@gmail.com"
+
+# 2. Set up Credentials and Token Storage
+git config --global credential.helper manager
+git config --global credential.https://github.com.username Sheetal4587
+
+# 3. Store GitHub Token (Use Git Credential Manager)
+# Method 1: Using Git Credential Manager (Recommended)
+git credential-manager store
+git config --global credential.helper manager-core
+
+# Method 2: Using Windows Credential Manager
+cmdkey /generic:LegacyGeneric:target=git:https://github.com /user:Sheetal4587 /pass:YOUR_TOKEN
+
+# 4. Initialize Repository
+git init
+git checkout -b main
+
+# 5. Stage and Commit
+git add .
+git commit -m "Initial commit"
+
+# 6. Set Remote and Push
+git remote add origin https://github.com/Sheetal4587/fsvad.git
+git push -u origin main
+
+# Alternative: Using GitHub CLI
+gh auth login
+gh auth setup-git
+gh repo create fsvad --private --source=. --remote=origin --push
+
+# Notes:
+# - When prompted for password, use your GitHub token, not your password
+# - Store tokens securely using credential manager
+# - Never share tokens in plain text
+# - Revoke exposed tokens immediately
+# - Token should have 'repo' and 'workflow' scopes
+
+# Full paths for Windows:
+# Git: C:\Program Files\Git\cmd\git.exe
+# GitHub CLI: C:\Program Files\GitHub CLI\gh.exe
+# Credential Manager: C:\Program Files\Git\mingw64\libexec\git-core\git-credential-manager.exe

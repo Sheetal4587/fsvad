@@ -1,0 +1,8 @@
+Do not use and css inline or outline
+
+- Use creativity to create nice UI with modern react components 
+- Follow every prompt and dont stop untill you get it right as per the prompt.
+- When you get stuck with a same problem and not able to fix and get it right try to 
+get out of that wrong loop and do reverse engineering to fix is with different strategy.
+- use only reactt components and not any inline or outline css 
+- use material UI instead . 
