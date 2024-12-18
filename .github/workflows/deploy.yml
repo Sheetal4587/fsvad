@@ -24,18 +24,18 @@ jobs:
       - name: Install dependencies
         run: |
           cd project
-          npm install
+          npm install --legacy-peer-deps
           
       - name: Build
         run: |
           cd project
-          VITE_SKIP_TS_CHECK=true npm run build -- --skipTypeCheck
+          npm run build
         env:
           CI: false
-          VITE_SKIP_TS_CHECK: true
           
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./project/dist
+          force_orphan: true
